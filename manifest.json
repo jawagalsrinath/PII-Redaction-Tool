@@ -1,0 +1,28 @@
+{
+    "manifest_version" : 3,
+    "name" : "PII REDACTING GUARDIAN",
+    "version" : "1.0",
+    "permissions" : [
+        "downloads",
+        "scripting",
+        "storage",
+        "declarativeNetRequest",
+        "declarativeNetRequestFeedback"
+    ],
+    "host_permissions" : ["<all_urls>"],
+    "background" : {
+        "service_worker" : "backend/background.js",
+        "type" : "module"
+    },
+    "content_scripts" : [{
+        "matches" : ["<all_urls>"],
+        "js" : ["backend/content/interceptor.js"],
+        "run_at" : "document_start",
+        "all_frames" : true
+    }],
+    
+    "web_accessible_resources" : [{
+        "resources" :  ["frontend/components/model.html", "frontend/components/model.js", "frontend/styles/model.css"],
+        "matches" : ["<all_urls>"]
+    }]
+ }
